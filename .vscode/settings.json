@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    "api/_build/**": false,
+    "public/build/**": false
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
+}

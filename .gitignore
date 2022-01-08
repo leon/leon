@@ -1,0 +1,14 @@
+node_modules
+
+.DS_Store
+
+.cache
+.firebase
+.vercel
+.output
+build
+hosting-public
+
+app/styles/tailwind-build.css
+public/build
+api/_build
