@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "api/_build/**": true,
+    "public/build/**": true
+  },
+  "editor.formatOnSave": true
+}
