@@ -13,7 +13,7 @@ export const loader: LoaderFunction = async () => {
     limit: 4,
   })
 
-  return json({ articles })
+  return { articles }
 }
 
 export default function ArticlesPage() {

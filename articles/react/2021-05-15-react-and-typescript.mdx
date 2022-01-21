@@ -10,11 +10,6 @@ tags:
 githubUrl: https://www.github.com
 ---
 
-import { HeroBlock } from '~/blocks/hero.block'
-import { Note } from '~/components/note'
-
-<HeroBlock {...attributes} />
-
 I do not use the built in functional component type `React.FC` because it forces you to always have the prop `children`.
 Instead I like to be explicit about what props go into each component, that way `VS Code` will give me a hard time if I try to add a child to a component that does not support it.
 

@@ -6,7 +6,7 @@ export function Footer({}: FooterProps) {
   const year = new Date().getFullYear()
   return (
     <footer className="mt-12 text-gray-400 fixed-bottom bg-primary-dark">
-      <div className="container flex flex-col items-center justify-between h-64 p-4">
+      <div className="container flex flex-col items-center justify-between p-4 min-h-42">
         <div className="flex justify-center m-8">
           <SocialNavItem href="https://github.com/leon" title="Visit my Github Page">
             <GithubIcon />

@@ -35,6 +35,7 @@ export function Header({}: HeaderProps) {
           <HeaderNavItem href="/">Home</HeaderNavItem>
           <HeaderNavItem href="/articles">Articles</HeaderNavItem>
           <HeaderNavItem href="/projects">Projects</HeaderNavItem>
+          <HeaderNavItem href="/uses">Uses</HeaderNavItem>
           <HeaderNavItem href="/about">About</HeaderNavItem>
         </div>
 

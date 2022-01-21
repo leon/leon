@@ -1,6 +1,4 @@
 import { Link } from 'remix'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import clsx from 'clsx'
 import { RightArrowIcon } from './icons'
 

@@ -1,5 +1,5 @@
-import { getMdxFiles, extractMeta } from './mdx'
-import { ImageRef, Meta, ROOT_PATH } from './domain'
+import { getMdxFiles, extractMeta } from './mdx.server'
+import { ImageRef, Meta } from './domain'
 import { sortBy } from 'lodash'
 
 export interface Project extends Meta {
@@ -13,6 +13,7 @@ export interface Project extends Meta {
 }
 
 export const PROJECT_PATH = 'projects'
+export const PROJECT_URL = 'projects'
 
 export interface GetProjectOptions {
   // filters
@@ -27,12 +28,12 @@ export interface GetProjectOptions {
   limit?: number
 }
 export async function getProjects(options?: GetProjectOptions): Promise<Project[]> {
-  let files = await getMdxFiles(ROOT_PATH)
+  let files = await getMdxFiles(PROJECT_PATH)
 
   files = files.filter((f) => f.startsWith(PROJECT_PATH))
 
   let articles = await Promise.all(
-    files.map((filePath) => extractMeta<Project>(ROOT_PATH, filePath)),
+    files.map((filePath) => extractMeta<Project>(PROJECT_PATH, filePath, PROJECT_URL)),
   )
 
   // filters

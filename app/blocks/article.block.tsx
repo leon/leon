@@ -1,4 +1,4 @@
-import { Article } from '~/data/articles'
+import type { Article } from '~/data/articles'
 import { ArticleCard } from '~/components/article-card'
 import { MoreButton } from '~/components/more-button'
 

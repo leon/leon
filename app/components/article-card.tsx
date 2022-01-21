@@ -1,4 +1,4 @@
-import { Article } from '~/data/articles'
+import type { Article } from '~/data/articles'
 import { Link } from 'remix'
 import clsx from 'clsx'
 
@@ -14,7 +14,7 @@ export function ArticleCard({
     <Link className={clsx('block transition-colors hover:text-accent', className)} to={url}>
       {image && <img className="block mb-2" alt="" {...image} />}
       <div className="badge">{topic}</div>
-      <h4 className="font-heading font-extrabold text-2xl">{title}</h4>
+      <h4 className="text-2xl font-extrabold font-heading">{title}</h4>
       <p className="text-sm">{intro}</p>
     </Link>
   )

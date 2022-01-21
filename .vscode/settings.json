@@ -3,5 +3,8 @@
     "api/_build/**": true,
     "public/build/**": true
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
 }

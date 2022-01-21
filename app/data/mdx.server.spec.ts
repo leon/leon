@@ -1,4 +1,4 @@
-import { getMdxFiles, extractMeta } from './mdx'
+import { getMdxFiles, extractMeta } from './mdx.server'
 
 describe('getMdxFiles', () => {
   it('should read mdx files from test folder', async () => {

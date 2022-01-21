@@ -1,6 +1,8 @@
 import fs from 'fs/promises'
+import { constants } from 'fs'
 import grayMatter from 'gray-matter'
-import { join, posix, relative } from 'path'
+import { bundleMDX } from 'mdx-bundler'
+import { join, posix, relative, dirname } from 'path'
 import { Meta } from './domain'
 
 /**
@@ -38,24 +40,18 @@ export async function getMdxFiles(rootPath: string, origin?: string): Promise<st
 export async function getMdxFile(rootPath: string, url: string): Promise<string | null> {
   try {
     const file = `${url}.mdx`
-    const exists = await fs.lstat(join(rootPath, file))
-    console.log('getMdxFile', exists.isFile(), join(rootPath, file))
-    if (exists.isFile()) {
-      return file
-    }
+    await fs.access(join(rootPath, file), constants.F_OK)
+    return file
+  } catch {}
 
+  try {
     // retry with index route
     const indexFile = `${url}/index.mdx`
-    const indexExists = await fs.lstat(join(rootPath, indexFile))
-    console.log('getMdxFile index', exists.isFile(), join(rootPath, indexFile))
-    if (indexExists.isFile()) {
-      return indexFile
-    }
+    await fs.access(join(rootPath, indexFile), constants.F_OK)
+    return indexFile
+  } catch {}
 
-    return null
-  } catch (e) {
-    return null
-  }
+  return null
 }
 
 /**
@@ -70,16 +66,41 @@ export async function extractMeta<T extends Meta>(
   urlBase?: string,
 ): Promise<T> {
   const file = await fs.readFile(join(rootPath, relativeFilePath), 'utf8')
-  const segments = relativeFilePath.split(posix.sep)
-  // remix can contain __layout directories, that are not rendered in the url, here we remove them
-  const removedLayoutSegments = segments.filter((s) => !s.startsWith('__')).join('/')
   const { data } = await grayMatter(file)
   const url = posix.join(
     urlBase ?? '',
-    removedLayoutSegments.replace(/\/index\.mdx?$/, '').replace(/\.mdx?$/, ''),
+    relativeFilePath.replace(/\/index\.mdx?$/, '').replace(/\.mdx?$/, ''),
   )
   return {
     url: `/${url}`,
+    file: relativeFilePath,
     ...data,
   } as T
+}
+
+export async function bundleMdx(
+  rootPath: string,
+  relativeFilePath: string,
+  frontmatter: any = {},
+): Promise<string> {
+  const source = await fs.readFile(join(rootPath, relativeFilePath), 'utf8')
+  const filePath = join(process.cwd(), rootPath, relativeFilePath)
+  const cwd = dirname(filePath)
+
+  const rehypePrism = await import('rehype-prism-plus').then((mod) => mod.default)
+
+  const result = await bundleMDX({
+    cwd,
+    source,
+    globals: {
+      frontmatter,
+    },
+    xdmOptions(options) {
+      options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypePrism]
+      // options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkMdxImages]
+      return options
+    },
+  })
+
+  return result.code
 }

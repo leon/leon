@@ -1,7 +1,6 @@
-import { getMdxFiles, extractMeta, getMdxFile } from './mdx'
+import { getMdxFiles, extractMeta, bundleMdx } from './mdx.server'
 import { sortBy } from 'lodash'
-import { ImageRef, Meta, ROOT_PATH } from './domain'
-import { join } from 'path'
+import { ImageRef, Meta } from './domain'
 
 export interface Article extends Meta {
   description: string
@@ -9,13 +8,16 @@ export interface Article extends Meta {
   topic: string
   tags?: string[]
 
+  customHeader?: boolean
   gradient?: boolean
   cover?: ImageRef
   image?: ImageRef
+
+  mdx?: string
 }
 
-export const ARTICLE_URL_BASE = '/articles'
-export const ARTICLE_PATH = 'articles/__article'
+export const ARTICLE_PATH = 'articles'
+export const ARTICLE_URL = 'articles'
 
 export interface GetArticleOptions {
   // filters
@@ -30,12 +32,12 @@ export interface GetArticleOptions {
   limit?: number
 }
 export async function getArticles(options?: GetArticleOptions): Promise<Article[]> {
-  let files = await getMdxFiles(ROOT_PATH)
+  let files = await getMdxFiles(ARTICLE_PATH)
 
-  files = files.filter((f) => f.startsWith(ARTICLE_PATH))
+  // files = files.filter((f) => f.startsWith(ARTICLE_PATH))
 
   let articles = await Promise.all(
-    files.map((filePath) => extractMeta<Article>(ROOT_PATH, filePath)),
+    files.map((filePath) => extractMeta<Article>(ARTICLE_PATH, filePath, ARTICLE_URL)),
   )
 
   // filters
@@ -60,11 +62,17 @@ export async function getArticles(options?: GetArticleOptions): Promise<Article[
 }
 
 export async function getArticle(url: string): Promise<Article | null> {
-  const articlePath = join(ROOT_PATH, ARTICLE_PATH)
-  const articleUrl = url.replace(`${ARTICLE_URL_BASE}/`, '')
-  const mdxFilePath = await getMdxFile(articlePath, articleUrl)
-  if (!mdxFilePath) {
+  let articles = await getArticles()
+  const article = articles.find((article) => article.url === url)
+
+  if (!article) {
     return null
   }
-  return extractMeta<Article>(articlePath, mdxFilePath)
+
+  const mdx = await bundleMdx(ARTICLE_PATH, article.file, article)
+
+  return {
+    ...article,
+    mdx,
+  }
 }

@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { ImageRef } from '~/data/domain'
+import type { ImageRef } from '~/data/domain'
 import { parseISO, format } from 'date-fns'
 import { useRandomColor } from '~/utils'
 import { GithubIcon } from '~/components/icons'
