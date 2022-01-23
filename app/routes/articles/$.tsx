@@ -16,7 +16,7 @@ import { imageUrl } from '~/utils/image'
 
 const ARTICLE_CACHE =
   process.env.NODE_ENV === 'production'
-    ? 'public, s-maxage=86400, max-age=84600, stale-while-revalidate=86400, stale-if-error=72400'
+    ? 'public, s-maxage=7200, max-age=7200, stale-while-revalidate=86400, stale-if-error=72400'
     : 'private, no-cache'
 
 type ArticleData = {
@@ -40,9 +40,9 @@ export const loader: LoaderFunction = async ({ request }) => {
   )
 }
 
-export const headers: HeadersFunction = () => {
+export const headers: HeadersFunction = ({ loaderHeaders }) => {
   return {
-    'Cache-Control': ARTICLE_CACHE,
+    'Cache-Control': loaderHeaders.get('Cache-Control')!,
   }
 }
 

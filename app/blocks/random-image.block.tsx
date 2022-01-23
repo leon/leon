@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { HTMLAttributes } from 'react'
-import { Image } from '~/components/Image'
+import { Image } from '~/components/image'
 import { useRandomValue } from '~/utils/useRandomValue'
 
 export interface RandomImageBlockProps extends HTMLAttributes<HTMLDivElement> {
