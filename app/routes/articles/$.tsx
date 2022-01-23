@@ -11,13 +11,8 @@ import { HeroBlock } from '~/blocks/hero.block'
 import { Mdx } from '~/components/mdx'
 import { NotFound } from '~/components/not-found'
 import { Prose } from '~/components/prose'
-import { Article, getArticle } from '~/data/articles'
+import { Article, ARTICLE_CACHE, getArticle } from '~/data/articles'
 import { imageUrl } from '~/utils/image'
-
-const ARTICLE_CACHE =
-  process.env.NODE_ENV === 'production'
-    ? 'public, s-maxage=7200, max-age=7200, stale-while-revalidate=86400, stale-if-error=72400'
-    : 'private, no-cache'
 
 type ArticleData = {
   article: Article

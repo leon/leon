@@ -1,7 +1,9 @@
 import { sortBy } from 'lodash'
+import { DEFAULT_CACHE } from '.'
 import { ImageRef, Meta } from './domain'
 import { bundleMdx, extractMeta, getMdxFiles } from './mdx.server'
 
+export const ARTICLE_CACHE = DEFAULT_CACHE
 export interface Article extends Meta {
   description: string
   intro: string

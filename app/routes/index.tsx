@@ -2,12 +2,8 @@ import type { HeadersFunction, LoaderFunction, MetaFunction } from 'remix'
 import { json, useLoaderData } from 'remix'
 import { ArticleBlock } from '~/blocks/article.block'
 import { IntroBlock } from '~/blocks/intro.block'
+import { DEFAULT_CACHE } from '~/data'
 import { Article, getArticles } from '~/data/articles'
-
-const INDEX_CACHE =
-  process.env.NODE_ENV === 'production'
-    ? 'public, s-maxage=7200, max-age=7200, stale-while-revalidate=86400, stale-if-error=72400'
-    : 'private, no-cache'
 
 type IndexData = {
   articles: Article[]
@@ -23,7 +19,7 @@ export const loader: LoaderFunction = async () => {
     { articles },
     {
       headers: {
-        'Cache-Control': INDEX_CACHE,
+        'Cache-Control': DEFAULT_CACHE,
       },
     },
   )
