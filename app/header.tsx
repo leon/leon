@@ -34,8 +34,8 @@ export function Header({}: HeaderProps) {
         <div className="flex justify-self-center">
           <HeaderNavItem href="/">Home</HeaderNavItem>
           <HeaderNavItem href="/articles">Articles</HeaderNavItem>
-          <HeaderNavItem href="/projects">Projects</HeaderNavItem>
-          <HeaderNavItem href="/uses">Uses</HeaderNavItem>
+          {/* <HeaderNavItem href="/projects">Projects</HeaderNavItem>
+          <HeaderNavItem href="/uses">Uses</HeaderNavItem> */}
           <HeaderNavItem href="/about">About</HeaderNavItem>
         </div>
 

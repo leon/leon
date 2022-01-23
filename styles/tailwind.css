@@ -57,7 +57,7 @@
   }
 
   .badge {
-    @apply inline-block p-1 bg-black font-heading font-bold antialiased uppercase tracking-widest text-badge text-white hover:bg-slate-900;
+    @apply inline-block px-1 leading-relaxed bg-black font-bold antialiased uppercase tracking-widest text-badge text-white hover:bg-slate-900;
   }
 }
 

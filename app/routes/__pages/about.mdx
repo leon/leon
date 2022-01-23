@@ -4,7 +4,13 @@ meta:
   description: 'Who am I?'
 ---
 
-# About Me
+import { RandomImageBlock } from '~/blocks/random-image.block'
+
+<RandomImageBlock
+  className="mb-8"
+  images={['/photos/house/field.jpg', '/photos/house/rainbow.jpg', '/photos/house/winter.jpg']}
+  title="About Me"
+/>
 
 I'm born and raised in Örebro, Sweden in the eighties.
 It all started when my mom went to art collage in Brighton, England. Fell in love with my eccentric dad who was working as the ceramics teacher.

@@ -9,7 +9,7 @@ export function IntroBlock({}: IntroBlockProps) {
         <div
           className={clsx(
             // mobile
-            'min-h-screen-[50vh] grid grid-flow-row place-items-center',
+            'min-h-[50vh] grid grid-flow-row place-items-center',
             // desktop
             'md:grid-flow-col md:auto-cols-fr',
           )}
