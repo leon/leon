@@ -12,9 +12,12 @@ import { Mdx } from '~/components/mdx'
 import { NotFound } from '~/components/not-found'
 import { Prose } from '~/components/prose'
 import { Article, getArticle } from '~/data/articles'
+import { imageUrl } from '~/utils/image'
 
 const ARTICLE_CACHE =
-  'public, s-maxage=86400, max-age=84600, stale-while-revalidate=86400, stale-if-error=72400'
+  process.env.NODE_ENV === 'production'
+    ? 'public, s-maxage=86400, max-age=84600, stale-while-revalidate=86400, stale-if-error=72400'
+    : 'private, no-cache'
 
 type ArticleData = {
   article: Article
@@ -50,15 +53,20 @@ export const meta: MetaFunction = ({ data }: { data: ArticleData }) => {
 
   const { article } = data
   const title = [article.title, article.topic, 'Leon Radley'].filter(Boolean).join(' - ')
+  const image = article.image && {
+    src: imageUrl(article.image.src, 720, 400, 'cover'),
+    width: 720,
+    height: 400,
+  }
   return {
     title,
     description: article.description,
     'og:title': title,
-    ...(article.image
+    ...(image
       ? {
-          'og:image': article.image.src,
-          'og:image:width': `${article.image.width}`,
-          'og:image:height': `${article.image.height}`,
+          'og:image': image.src,
+          'og:image:width': `${image.width}`,
+          'og:image:height': `${image.height}`,
         }
       : {}),
   }

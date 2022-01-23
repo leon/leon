@@ -1,18 +1,19 @@
 import clsx from 'clsx'
-import type { ImageRef } from '~/data/domain'
-import { parseISO, format } from 'date-fns'
-import { useRandomColor } from '~/utils'
+import { format, parseISO } from 'date-fns'
 import { GithubIcon } from '~/components/icons'
+import { TagList } from '~/components/tag-list'
+import type { ImageRef } from '~/data/domain'
+import { useRandomColor } from '~/utils'
 
 export interface HeroBlockProps {
   title: string
   date?: string
-  topic?: string
+  tags?: string[]
   image?: ImageRef
   className?: string
   githubUrl?: string
 }
-export function HeroBlock({ title, date, topic, image, className, githubUrl }: HeroBlockProps) {
+export function HeroBlock({ title, date, tags, image, className, githubUrl }: HeroBlockProps) {
   const parsedDate = date && parseISO(date)
   const dateFormatted = parsedDate && format(parsedDate, 'MMMM yyy')
   const randomColor = useRandomColor()
@@ -20,7 +21,7 @@ export function HeroBlock({ title, date, topic, image, className, githubUrl }: H
     <div
       className={clsx(
         // place under header, and make full width
-        'not-prose w-full-breakout !-mt-16 pt-24',
+        'not-prose relative w-prose-full header-offset-mobile lg:header-offset-desktop',
         'flex justify-center items-end',
         className,
       )}
@@ -37,8 +38,8 @@ export function HeroBlock({ title, date, topic, image, className, githubUrl }: H
           alt={image.alt}
         />
       )}
-      <div className="z-10 flex flex-col items-center my-6">
-        {topic && <span className="text-base badge">{topic}</span>}
+      <div className="z-10 flex flex-col items-center my-8">
+        {tags && <TagList url="/articles" tags={tags} />}
         <h1 className="heading-1">{title}</h1>
         <time className="text-2xl font-bold" dateTime={date}>
           {dateFormatted}
@@ -51,7 +52,7 @@ export function HeroBlock({ title, date, topic, image, className, githubUrl }: H
           href={githubUrl}
         >
           <GithubIcon />
-          <span>View on Github</span>
+          <span className="hidden md:inline">View on Github</span>
         </a>
       )}
     </div>

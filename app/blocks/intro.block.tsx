@@ -4,8 +4,8 @@ import { Gradient } from '~/components/gradient'
 export interface IntroBlockProps {}
 export function IntroBlock({}: IntroBlockProps) {
   return (
-    <Gradient className="relative -mt-16">
-      <div className="container max-w-screen-xl mt-16">
+    <Gradient className="relative header-offset-mobile lg:header-offset-desktop">
+      <div className="container max-w-screen-xl">
         <div
           className={clsx(
             // mobile
@@ -21,18 +21,11 @@ export function IntroBlock({}: IntroBlockProps) {
           />
           <div className="my-8">
             <h1 className="heading-1">Hello, I'm Leon 👋</h1>
+            <p className="text-lg">I love tech, coding and everything web.</p>
             <p className="text-lg">
-              I'm facinated by the web and spend most my days learning about web tech and 3D.
+              Here you will random articles and labs about things I'm currently working with. Or
+              tips and tricks that I want to remember.
             </p>
-            <p className="mt-4 text-lg">
-              I'm the CTO for{' '}
-              <a className="underline" href="https://www.wec360.com">
-                wec360°
-              </a>
-              , a Swedish Prop-Tech company building products for presenting real estate using web
-              and 3D tech.
-            </p>
-            <p></p>
           </div>
         </div>
       </div>

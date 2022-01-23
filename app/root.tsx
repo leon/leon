@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+import type { MetaFunction } from 'remix'
 import {
   Links,
   LinksFunction,
@@ -8,14 +10,11 @@ import {
   ScrollRestoration,
   useCatch,
 } from 'remix'
-import type { MetaFunction } from 'remix'
-
 import globalStylesUrl from '~/styles/global.css'
 import prismStyles from '~/styles/prism.css'
-import tailwindStyles from '../public/build/tailwind.css'
-import { ReactNode } from 'react'
-import { Header } from './header'
+import tailwindStyles from '~/styles/tailwind-build.css'
 import { Footer } from './footer'
+import { Header } from './header'
 
 export let links: LinksFunction = () => {
   return [
@@ -25,7 +24,7 @@ export let links: LinksFunction = () => {
     { rel: 'stylesheet', href: prismStyles },
     {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?display=swap&family=Encode+Sans:wght@100..900',
+      href: 'https://fonts.googleapis.com/css2?family=Outfit',
     },
   ]
 }

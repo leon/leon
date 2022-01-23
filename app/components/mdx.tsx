@@ -1,8 +1,10 @@
 import { ComponentMap, getMDXComponent } from 'mdx-bundler/client'
 import { useMemo } from 'react'
+import { Image } from '~/components/image'
 import { Note } from '~/components/note'
 
 const mdxComponentMap: ComponentMap = {
+  Image,
   Note,
 }
 

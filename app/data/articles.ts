@@ -1,6 +1,6 @@
-import { getMdxFiles, extractMeta, bundleMdx } from './mdx.server'
 import { sortBy } from 'lodash'
 import { ImageRef, Meta } from './domain'
+import { bundleMdx, extractMeta, getMdxFiles } from './mdx.server'
 
 export interface Article extends Meta {
   description: string
@@ -14,6 +14,7 @@ export interface Article extends Meta {
   image?: ImageRef
 
   mdx?: string
+  draft?: boolean
 }
 
 export const ARTICLE_PATH = 'articles'
@@ -41,6 +42,8 @@ export async function getArticles(options?: GetArticleOptions): Promise<Article[
   )
 
   // filters
+  articles = articles.filter((i) => !i.draft)
+
   if (options?.topic) {
     articles = articles.filter((i) => i.topic === options.topic)
   }
@@ -50,7 +53,7 @@ export async function getArticles(options?: GetArticleOptions): Promise<Article[
 
   // sorting
   if (options?.sortBy) {
-    articles = sortBy(articles, [options.sortBy], [options.sortByOrder ?? 'asc'])
+    articles = sortBy(articles, [options.sortBy], [options.sortByOrder ?? 'desc'])
   }
 
   // limit

@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import { GithubIcon, LinkedInIcon, TwitterIcon } from '~/components/icons'
-import { SocialNavItem } from '~/components/social-nav'
 import { ReactNode } from 'react'
 import { Link, NavLink } from 'remix'
+import { GithubIcon, LinkedInIcon, TwitterIcon } from '~/components/icons'
+import { SocialNavItem } from '~/components/social-nav'
 
 export interface HeaderProps {}
 export function Header({}: HeaderProps) {
@@ -16,18 +16,18 @@ export function Header({}: HeaderProps) {
           // mobile
           'flex flex-col items-center mt-4',
           // desktop
-          'md:grid grid-cols-3 md:h-16 md:mt-0 md:px-4',
+          'lg:grid grid-cols-3 lg:h-16 lg:mt-0 lg:px-4',
         )}
       >
         <Link
           className="flex items-center gap-4 no-underline font-heading text-primary-dark hover:text-primary-light hover:no-underline"
           to="/"
         >
-          <img
+          {/* <img
             className="block w-12 h-12 border border-gray-300 rounded-full"
             src="/images/leon-radley.jpg"
             alt="Leon Radley"
-          />
+          /> */}
           <span className="text-2xl font-extrabold">Leon Radley</span>
           {/* <span className="text-sm uppercase">Article &bull; Labs &bull; Tips</span> */}
         </Link>
@@ -39,7 +39,7 @@ export function Header({}: HeaderProps) {
           <HeaderNavItem href="/about">About</HeaderNavItem>
         </div>
 
-        <div className="hidden md:flex md:justify-self-end">
+        <div className="hidden lg:flex lg:justify-self-end">
           <SocialNavItem href="https://github.com/leon" title="Visit my Github Page">
             <GithubIcon />
           </SocialNavItem>

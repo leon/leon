@@ -7,6 +7,7 @@ module.exports = {
   publicPath: '/build/',
   serverBuildDirectory: 'api/_build',
   ignoredRouteFiles: ['.*'],
+  devServerBroadcastDelay: 50,
 
   // mdx: async (filename) => {
   //   const [rehypePrism] = await Promise.all([
