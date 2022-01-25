@@ -1,6 +1,6 @@
 import { HeadersFunction, json, LoaderFunction, useLoaderData } from 'remix'
 import { ArticleBlock } from '~/blocks/article.block'
-import { GradientHeroBlock } from '~/blocks/gradient-hero.block'
+import { RandomImageBlock } from '~/blocks/random-image.block'
 import { Article, ARTICLE_CACHE, getArticles } from '~/data/articles'
 
 export interface ArticlesPageData {
@@ -34,8 +34,8 @@ export default function ArticlesPage() {
   const { articles } = useLoaderData<ArticlesPageData>()
   return (
     <>
-      <GradientHeroBlock title="Articles" />
-      <ArticleBlock articles={articles} />
+      <RandomImageBlock images={['/photos/bgs/desk.jpg', '/photos/bgs/pc.jpg', '/photos/bgs/react.jpg']} />
+      <ArticleBlock title="Articles" articles={articles} />
     </>
   )
 }

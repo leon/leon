@@ -4,7 +4,7 @@ import { Image } from '~/components/image'
 import { useRandomValue } from '~/utils/useRandomValue'
 
 export interface RandomImageBlockProps extends HTMLAttributes<HTMLDivElement> {
-  title: string
+  title?: string
   images: string[]
 }
 export function RandomImageBlock({ title, images, className }: RandomImageBlockProps) {
@@ -13,17 +13,17 @@ export function RandomImageBlock({ title, images, className }: RandomImageBlockP
     <div
       className={clsx(
         // place under header, and make full width
-        'not-prose relative w-prose-full min-h-[50vh] header-offset-mobile lg:header-offset-desktop',
-        'flex justify-center items-end',
+        'not-prose w-prose-full header-offset-mobile lg:header-offset-desktop relative min-h-[50vh]',
+        'flex items-end justify-center',
         className,
       )}
     >
-      {randomImage && (
-        <Image className="absolute object-cover w-full h-full" src={randomImage} width={2048} />
+      {randomImage && <Image className="absolute h-full w-full object-cover" src={randomImage} width={2048} />}
+      {title && (
+        <div className="z-10 my-8 flex flex-col items-center">
+          <h1 className="heading-1 text-white">{title}</h1>
+        </div>
       )}
-      <div className="z-10 flex flex-col items-center my-8">
-        <h1 className="text-white heading-1">{title}</h1>
-      </div>
     </div>
   )
 }

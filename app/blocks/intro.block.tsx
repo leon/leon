@@ -30,25 +30,6 @@ export function IntroBlock({}: IntroBlockProps) {
           </div>
         </div>
       </div>
-
-      {/* <div className="container flex flex-col justify-center max-w-screen-xl mt-16">
-        <div className="grid items-center content-center grid-cols-1 md:grid-cols-2 md:gap-8">
-          
-
-          <div className="my-8">
-            <h1 className="heading-1">Hello, I'm Leon 👋</h1>
-            <p className="text-lg">I'm facinated by the web and spend most my days learning about web tech and 3D.</p>
-            <p className="mt-4 text-lg">
-              I'm the CTO for{' '}
-              <a className="underline" href="https://www.wec360.com">
-                wec360°
-              </a>
-              , a Swedish Prop-Tech company building products for presenting real estate using web and 3D tech.
-            </p>
-            <p></p>
-          </div>
-        </div>
-      </div> */}
     </Gradient>
   )
 }
