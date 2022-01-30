@@ -1,15 +1,6 @@
 import { ReactNode } from 'react'
 import type { HeadersFunction, MetaFunction } from 'remix'
-import {
-  Links,
-  LinksFunction,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useCatch,
-} from 'remix'
+import { Links, LinksFunction, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from 'remix'
 import globalStylesUrl from '~/styles/global.css'
 import prismStyles from '~/styles/prism.css'
 import tailwindStyles from '~/styles/tailwind-build.css'
@@ -92,6 +83,18 @@ function Document({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-27142956-1"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'UA-27142956-1');
+              `,
+          }}
+        ></script>
       </head>
       <body className="min-h-screen">
         {children}
@@ -105,7 +108,7 @@ function Document({ children }: { children: ReactNode }) {
 
 function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <Header />
       <main className="relative flex-grow">{children}</main>
       <Footer />
