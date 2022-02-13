@@ -6,15 +6,14 @@ intro: 'Getting tools to work together can be a bit of a challenge. In this arti
 tags:
   - web-components
   - vite
-  - typescript
   - lit
   - storybook
 githubUrl: https://github.com/leon/blog-vite-lit-storybook
 ---
 
 At work we wanted to build some simple web components to publish to NPM.
-I didn't want to go overboard with the tooling, so I decided to use Vite.
-I was thinking about writing plain web components, but there is a lot of boiler plate, therefor I chose [Lit](https://lib.dev) for the job.
+
+I was thinking about writing plain web components, but there is a lot of boiler plate, therefor I chose [Lit](https://lib.dev) for the job. And [Vite](https://vitejs.dev) for development and packaging.
 
 ### Setup new Vite project
 
@@ -26,18 +25,20 @@ npm create vite@latest my-webcomponents -- --template lit-ts
 
 ### Install Storybook
 
-Storybook is built on top of Webpack, but in version 7 they are working against allowing you to use esbuild or vite or swc or whatever floats your boat.
-They have started to work against this goal and we can install `storybook-builder-vite` so that the stories are built with Vite.
-I think they still use webpack for building the UI, but our stories will at least be faster built using Vite.
-
 ```bash
 npx sb@latest init --builder storybook-builder-vite
 ```
 
+<Note>
+  Storybook uses webpack by default, but since we are using Vite, we would rather use the `storybook-builder-vite` plugin.
+
+Storybook 7 is going to be better and more modular when it comes to which build system it uses under the hood, be it vite, esbuild, swc...
+
+</Note>
+
 ### Vite config changes
 
-In our case we wanted to be able to use the web components without having to bundle lit with it, so we need to change so Vite doesn't externalize `lit`
-We do this by
+In our case we wanted to be able to use the web components as a stand alone package. the default config externalizes `lit`. so we have to comment that out.
 
 ```ts
 // vite.config.js
@@ -53,7 +54,7 @@ export default defineConfig({
     rollupOptions: {
       // If we want to publish standalone components we don't externalize lit,
       // if you are going to use lit in your own project, you can make it a dep instead.
-      // external: /^lit/,
+      // external: /^lit/, <-- comment this line
     },
   },
 })
@@ -116,20 +117,20 @@ module.exports = {
 
 ### Now we have a working Storybook
 
-There is a downside to using web components with storybook, and that is that it does not support hot reload.
+There is a downside to using web components (lit) with storybook, and that is that it does not support hot reload.
 so each change will cause Storybook to do a full reload.
 Hopefully this will be mitigated in the future.
 
 ### Publish to NPM
 
-This section covers the steps needed to publish to NPM.
+This section covers the steps needed to publish to NPM, if you are not planning to publish to NPM, you can skip this section.
 
 First off, depending if you want to publish standalone web components you will need to move `lit` to become a devDependency in your `package.json`.
 
-Also instead of only exporting the single `dist/my-element.es.js` file we will change it so we have a barrel file that exports all components.
-and change both `index.html` and `vite.config.js` to point `src/index.ts`
-We then also need to change `package.json` to export the correct files.
-And we also want to make the package public by removing `"private": true` and choosing a name and license.
+- Also instead of only exporting the single `dist/my-element.es.js` file we will change it so we have a barrel file that exports all components.
+- and change both `index.html` and `vite.config.js` to point `src/index.ts`
+- We then also need to change `package.json` to export the correct files.
+- And we also want to make the package public by removing `"private": true` and choosing a name and license.
 
 after this we should be good to go by running
 
@@ -151,3 +152,8 @@ If all has gone well you should be able to use your new package by importing it
 <script type="module" src="https://cdn.skypack.dev/my-element"></script>
 <my-element name="Lit"></my-element>
 ```
+
+## Example Repo
+
+If you don't want to copy paste everything, I've created a demo project on github.
+you can find it here [https://github.com/leon/blog-vite-lit-storybook](https://github.com/leon/blog-vite-lit-storybook)
