@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash'
+import { orderBy } from 'lodash'
 import { DEFAULT_CACHE } from '.'
 import { ImageRef, Meta } from './domain'
 import { bundleMdx, extractMeta, getMdxFiles } from './mdx.server'
@@ -39,9 +39,7 @@ export async function getArticles(options?: GetArticleOptions): Promise<Article[
 
   // files = files.filter((f) => f.startsWith(ARTICLE_PATH))
 
-  let articles = await Promise.all(
-    files.map((filePath) => extractMeta<Article>(ARTICLE_PATH, filePath, ARTICLE_URL)),
-  )
+  let articles = await Promise.all(files.map((filePath) => extractMeta<Article>(ARTICLE_PATH, filePath, ARTICLE_URL)))
 
   // filters
   articles = articles.filter((i) => !i.draft)
@@ -55,7 +53,7 @@ export async function getArticles(options?: GetArticleOptions): Promise<Article[
 
   // sorting
   if (options?.sortBy) {
-    articles = sortBy(articles, [options.sortBy], [options.sortByOrder ?? 'desc'])
+    articles = orderBy(articles, [options.sortBy], [options.sortByOrder ?? 'desc'])
   }
 
   // limit
