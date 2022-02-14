@@ -18,6 +18,12 @@ export let links: LinksFunction = () => {
       rel: 'stylesheet',
       href: 'https://fonts.googleapis.com/css2?family=Outfit&display=swap',
     },
+    {
+      rel: 'alternate',
+      type: 'application/rss+xml',
+      title: 'RSS',
+      href: 'https://leon.id/feed.xml',
+    },
   ]
 }
 
