@@ -15,13 +15,7 @@
     "build:assets": "cpy --parents {articles,labs,photos,projects} public",
     "dev": "concurrently \"pnpm dev:css\" \"pnpm remix dev\"",
     "dev:css": "tailwindcss -i ./styles/tailwind.css -o ./app/styles/tailwind-build.css --watch",
-    "start": "remix-serve build",
-    "deploy:setup": "gcloud auth print-access-token | podman login -u oauth2accesstoken --password-stdin eu.gcr.io",
-    "docker:build": "pnpm clean && podman build . -t eu.gcr.io/leon-id/leon-id:latest",
-    "docker:push": "podman push eu.gcr.io/leon-id/leon-id:latest",
-    "deploy:cloudrun": "gcloud run deploy remix --project leon-id --source . --platform=managed --allow-unauthenticated --region=europe-west1 --concurrency=1000 --max-instances=10 --timeout=10 --cpu=2 --memory=1024Mi",
-    "deploy": "pnpm build && pnpm deploy:cloudrun",
-    "deploy:hosting": "pnpm firebase deploy --only hosting"
+    "start": "remix-serve build"
   },
   "dependencies": {
     "@remix-run/dev": "^1.7.2",
