@@ -1,4 +1,5 @@
-import { HeadersFunction, json, LoaderFunction, useLoaderData } from 'remix'
+import { HeadersFunction, json, LoaderFunction } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
 import { ArticleBlock } from '~/blocks/article.block'
 import { RandomImageBlock } from '~/blocks/random-image.block'
 import { Article, ARTICLE_CACHE, getArticles } from '~/data/articles'

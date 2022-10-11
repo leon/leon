@@ -1,12 +1,5 @@
-import {
-  HeadersFunction,
-  json,
-  LoaderFunction,
-  MetaFunction,
-  useCatch,
-  useLoaderData,
-  useParams,
-} from 'remix'
+import { HeadersFunction, json, LoaderFunction, MetaFunction } from '@remix-run/node'
+import { useCatch, useLoaderData, useParams } from '@remix-run/react'
 import { HeroBlock } from '~/blocks/hero.block'
 import { Mdx } from '~/components/mdx'
 import { NotFound } from '~/components/not-found'

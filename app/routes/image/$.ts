@@ -12,11 +12,11 @@
  * Further improvements could be done by implementing ETags, but that is out of scope for this demo.
  */
 
+import type { LoaderFunction } from '@remix-run/node'
+import type { Params } from '@remix-run/react'
 import type { ReadStream } from 'fs'
 import { createReadStream, statSync } from 'fs'
 import path from 'path'
-import type { Params } from 'react-router'
-import type { LoaderFunction } from 'remix'
 import type { FitEnum } from 'sharp'
 import sharp from 'sharp'
 import { PassThrough } from 'stream'
@@ -63,12 +63,7 @@ function extractParams(params: Params<string>, request: Request): ResizeParams {
   return { src, width, height, fit }
 }
 
-function streamingResize(
-  imageStream: ReadStream,
-  width: number | undefined,
-  height: number | undefined,
-  fit: keyof FitEnum,
-) {
+function streamingResize(imageStream: ReadStream, width: number | undefined, height: number | undefined, fit: keyof FitEnum) {
   // create the sharp transform pipline
   // https://sharp.pixelplumbing.com/api-resize
   // you can also add watermarks, sharpen, blur, etc.

@@ -1,10 +1,6 @@
-/node_modules/
-/build/
+/api/
 /public/build/
-/coverage/
-/.firebase/
-/.git/
-/.vscode/
-/.yarn/
-/.cache/
-/.output/
+
+.git/
+.cache/
+.pnpm-lock.yml

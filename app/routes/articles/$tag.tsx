@@ -1,4 +1,5 @@
-import { HeadersFunction, json, LoaderFunction, useLoaderData } from 'remix'
+import { HeadersFunction, json, LoaderFunction } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
 import { ArticleBlock } from '~/blocks/article.block'
 import { GradientHeroBlock } from '~/blocks/gradient-hero.block'
 import { Article, ARTICLE_CACHE, getArticles } from '~/data/articles'

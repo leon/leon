@@ -1,5 +1,5 @@
+import type { LoaderFunction } from '@remix-run/node'
 import { renderToString } from 'react-dom/server'
-import type { LoaderFunction } from 'remix'
 import { Mdx } from '~/components/mdx'
 import { ARTICLE_CACHE, getArticle, getArticles } from '~/data/articles'
 

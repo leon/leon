@@ -1,5 +1,6 @@
-import type { HeadersFunction, LoaderFunction, MetaFunction } from 'remix'
-import { json, useLoaderData } from 'remix'
+import type { HeadersFunction, LoaderFunction, MetaFunction } from '@remix-run/node'
+import { json } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
 import { ArticleBlock } from '~/blocks/article.block'
 import { IntroBlock } from '~/blocks/intro.block'
 import { DEFAULT_CACHE } from '~/data'
@@ -29,8 +30,7 @@ export const loader: LoaderFunction = async () => {
 export const meta: MetaFunction = () => {
   return {
     title: 'Leon Radley',
-    description:
-      'Leon Radley - articles and labs about web development and other things related to tech',
+    description: 'Leon Radley - articles and labs about web development and other things related to tech',
   }
 }
 

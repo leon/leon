@@ -1,4 +1,5 @@
-import { HeadersFunction, Outlet } from 'remix'
+import type { HeadersFunction } from '@remix-run/node'
+import { Outlet } from '@remix-run/react'
 import { Prose } from '~/components/prose'
 import { DEFAULT_CACHE } from '~/data'
 

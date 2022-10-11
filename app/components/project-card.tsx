@@ -1,15 +1,12 @@
-import type { Project } from '~/data/projects'
-import { Link } from 'remix'
+import { Link } from '@remix-run/react'
 import clsx from 'clsx'
+import type { Project } from '~/data/projects'
 
 export interface ProjectCardProps {
   article: Project
   className?: string
 }
-export function ProjectCard({
-  article: { url, topic, title, intro, image },
-  className,
-}: ProjectCardProps) {
+export function ProjectCard({ article: { url, topic, title, intro, image }, className }: ProjectCardProps) {
   return (
     <Link className={clsx('block transition-colors hover:text-accent', className)} to={url}>
       {image && <img className="block mb-2" alt="" {...image} />}

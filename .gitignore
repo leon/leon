@@ -3,12 +3,14 @@ node_modules
 .DS_Store
 
 .cache
-.firebase
+.env
 .vercel
 .output
-build
-hosting-public
 
-app/styles/tailwind-build.css
-public/build
-api/_build
+/build/
+/public/build
+/api/index.js
+/api/index.js.map
+/api/_assets/
+
+/app/styles/tailwind-build.css

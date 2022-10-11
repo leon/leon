@@ -1,5 +1,5 @@
+import { Link } from '@remix-run/react'
 import clsx from 'clsx'
-import { Link } from 'remix'
 import type { Article } from '~/data/articles'
 import { Image } from './image'
 
@@ -7,10 +7,7 @@ export interface ArticleCardProps {
   article: Article
   className?: string
 }
-export function ArticleCard({
-  article: { url, topic, title, intro, image },
-  className,
-}: ArticleCardProps) {
+export function ArticleCard({ article: { url, topic, title, intro, image }, className }: ArticleCardProps) {
   return (
     <Link className={clsx('block transition-colors hover:text-accent', className)} to={url}>
       {image && <Image className="block mb-2" src={image.src} width={320} height={200} />}

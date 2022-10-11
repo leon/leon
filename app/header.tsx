@@ -1,16 +1,13 @@
+import { Link, NavLink } from '@remix-run/react'
 import clsx from 'clsx'
 import { ReactNode } from 'react'
-import { Link, NavLink } from 'remix'
 import { GithubIcon, LinkedInIcon, TwitterIcon } from '~/components/icons'
 import { SocialNavItem } from '~/components/social-nav'
 
 export interface HeaderProps {}
 export function Header({}: HeaderProps) {
   return (
-    <nav
-      id="top"
-      className="z-10 bg-white shadow-sm bg-opacity-30 backdrop-filter backdrop-blur-lg"
-    >
+    <nav id="top" className="z-10 bg-white shadow-sm bg-opacity-30 backdrop-filter backdrop-blur-lg">
       <div
         className={clsx(
           // mobile
@@ -46,10 +43,7 @@ export function Header({}: HeaderProps) {
           <SocialNavItem href="https://www.twitter.com/leonradley" title="Visit my Twitter Stream">
             <TwitterIcon />
           </SocialNavItem>
-          <SocialNavItem
-            href="https://www.linkedin.com/in/leonradley/"
-            title="Visit my LinkedIn Page"
-          >
+          <SocialNavItem href="https://www.linkedin.com/in/leonradley/" title="Visit my LinkedIn Page">
             <LinkedInIcon />
           </SocialNavItem>
         </div>

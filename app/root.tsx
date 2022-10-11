@@ -1,6 +1,6 @@
+import type { HeadersFunction, LinksFunction, MetaFunction } from '@remix-run/node'
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from '@remix-run/react'
 import { ReactNode } from 'react'
-import type { HeadersFunction, MetaFunction } from 'remix'
-import { Links, LinksFunction, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from 'remix'
 import globalStylesUrl from '~/styles/global.css'
 import prismStyles from '~/styles/prism.css'
 import tailwindStyles from '~/styles/tailwind-build.css'
@@ -41,7 +41,7 @@ export const headers: HeadersFunction = () => {
 export function ErrorBoundary({ error }: { error: Error }) {
   console.error(error)
   return (
-    <Document title="Error!">
+    <Document>
       <Layout>
         <h1 className="heading-1">There was an error</h1>
         <p>{error.message}</p>
@@ -106,7 +106,7 @@ function Document({ children }: { children: ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === 'development' && <LiveReload />}
+        <LiveReload />
       </body>
     </html>
   )
