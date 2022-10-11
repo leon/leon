@@ -14,6 +14,7 @@ export let links: LinksFunction = () => {
     { rel: 'stylesheet', href: globalStylesUrl },
     { rel: 'stylesheet', href: tailwindStyles },
     { rel: 'stylesheet', href: prismStyles },
+    { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
     {
       rel: 'stylesheet',
       href: 'https://fonts.googleapis.com/css2?family=Outfit&display=swap',

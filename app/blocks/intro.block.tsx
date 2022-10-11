@@ -19,13 +19,14 @@ export function IntroBlock({}: IntroBlockProps) {
             className="block object-contain w-full h-auto max-w-xs m-8 rounded-full shadow-md"
             src="/images/leon-radley.jpg"
             alt="Picture of Leon Radley"
+            width={320}
+            height={320}
           />
           <div className="my-8">
             <h1 className="heading-1">Hello, I'm Leon 👋</h1>
             <p className="text-lg">I love tech, coding and everything web.</p>
             <p className="text-lg">
-              Here you will find articles, labs and projects relating to web development, 3d and
-              programming in general.
+              Here you will find articles, labs and projects relating to web development, 3d and programming in general.
             </p>
           </div>
         </div>

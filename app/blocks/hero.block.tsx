@@ -36,6 +36,7 @@ export function HeroBlock({ title, date, tags, image, className, githubUrl }: He
           width={image.width}
           height={image.height}
           alt={image.alt}
+          decoding="async"
         />
       )}
       <div className="z-10 flex flex-col items-center my-8">
