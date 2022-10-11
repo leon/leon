@@ -96,7 +96,7 @@ export async function bundleMdx(
     globals: {
       frontmatter,
     },
-    xdmOptions(options) {
+    mdxOptions(options) {
       options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypePrism]
       // options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkMdxImages]
       return options
