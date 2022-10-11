@@ -9,10 +9,10 @@ export interface ArticlesPageData {
   articles: Article[]
 }
 
-const TAGS = ['news', 'css', 'typescript', 'react', 'angular']
+const TAGS = ['news', 'css', 'typescript', 'react', 'angular', 'rxjs']
 
 export const loader: LoaderFunction = async ({ params }) => {
-  const tag = (params.tag as string).toLowerCase()
+  const tag = params.tag?.toLowerCase() ?? ''
   if (!TAGS.includes(tag)) {
     throw new Response(`${tag} Not Found`, { status: 404 })
   }
