@@ -19,10 +19,12 @@ export const loader: LoaderFunction = async () => {
   for (const article of articles) {
     const articleWithMdx = await getArticle(article.url)
     const html = renderToString(<Mdx mdx={articleWithMdx?.mdx!} />)
+    const categories = article.tags?.map((tag) => `<category>${tag}</category>`)
     items.push(`<item>
       <title>${article.title}</title>
       <pubDate>${pubDate(article.date)}</pubDate>
       <description><![CDATA[${article.description}]]></description>
+      ${categories?.join('')}
       <content:encoded><![CDATA[${html}]]></content:encoded>
       <link>${BASE_URL}${article.url}</link>
       <guid isPermaLink="false">${BASE_URL}${article.url}</guid>

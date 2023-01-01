@@ -1,8 +1,7 @@
 import { constants } from 'fs'
 import fs from 'fs/promises'
 import grayMatter from 'gray-matter'
-import { bundleMDX } from 'mdx-bundler'
-import { dirname, join, posix, relative } from 'path'
+import { join, posix, relative } from 'path'
 import { Meta } from './domain'
 
 /**
@@ -79,29 +78,18 @@ export async function extractMeta<T extends Meta>(
   } as T
 }
 
-export async function bundleMdx(
-  rootPath: string,
-  relativeFilePath: string,
-  frontmatter: any = {},
-): Promise<string> {
+export async function bundleMdx(rootPath: string, relativeFilePath: string): Promise<string> {
   const source = await fs.readFile(join(process.cwd(), rootPath, relativeFilePath), 'utf8')
-  const filePath = join(process.cwd(), rootPath, relativeFilePath)
-  const cwd = dirname(filePath)
-
+  const { compile } = await import('@mdx-js/mdx')
   const rehypePrism = await import('rehype-prism-plus').then((mod) => mod.default)
 
-  const result = await bundleMDX({
-    cwd,
-    source,
-    globals: {
-      frontmatter,
-    },
-    mdxOptions(options) {
-      options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypePrism]
-      // options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkMdxImages]
-      return options
-    },
+  const { data, content } = grayMatter(source)
+  const mdx = await compile(content, {
+    development: false,
+    format: 'mdx',
+    outputFormat: 'function-body',
+    rehypePlugins: [rehypePrism],
   })
 
-  return result.code
+  return String(mdx)
 }

@@ -39,7 +39,9 @@ export async function getArticles(options?: GetArticleOptions): Promise<Article[
 
   // files = files.filter((f) => f.startsWith(ARTICLE_PATH))
 
-  let articles = await Promise.all(files.map((filePath) => extractMeta<Article>(ARTICLE_PATH, filePath, ARTICLE_URL)))
+  let articles = await Promise.all(
+    files.map((filePath) => extractMeta<Article>(ARTICLE_PATH, filePath, ARTICLE_URL)),
+  )
 
   // filters
   articles = articles.filter((i) => !i.draft)
@@ -72,7 +74,7 @@ export async function getArticle(url: string): Promise<Article | null> {
     return null
   }
 
-  const mdx = await bundleMdx(ARTICLE_PATH, article.file, article)
+  const mdx = await bundleMdx(ARTICLE_PATH, article.file)
 
   return {
     ...article,
