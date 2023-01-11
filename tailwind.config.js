@@ -1,14 +1,6 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './app/**/*.{ts,tsx,mdx}',
-    './articles/**/*.{ts,tsx,mdx}',
-    './projects/**/*.{ts,tsx,mdx}',
-    './labs/**/*.{ts,tsx,mdx}',
-  ],
-  // darkMode: false, // or 'media' or 'class'
-  // corePlugins: {
-  //   preflight: false,
-  // },
+  content: ['./app/**/*.{ts,tsx}', './blocks/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
     container: {
       center: true,
@@ -18,6 +10,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        heading: ['"Mona Sans"', '"Helvetica Neue"', 'sans-serif'],
+      },
       fontSize: {
         badge: '.6rem',
       },
@@ -39,10 +34,6 @@ module.exports = {
         //   light: '#e0e6ed',
         //   lightest: '#f9fafc',
         // },
-      },
-      fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', '"Helvetica Neue"', 'sans-serif'],
-        heading: ['Outfit', '"Helvetica Neue"', 'sans-serif'],
       },
     },
   },
