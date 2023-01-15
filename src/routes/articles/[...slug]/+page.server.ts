@@ -10,5 +10,9 @@ export const load = (async ({ params }) => {
 		throw error(404, 'Article not found')
 	}
 
-	return article
+	return {
+		seoTitle: article.title,
+		seoDescription: article.description,
+		article,
+	}
 }) satisfies PageServerLoad

@@ -14,6 +14,8 @@ export const load = (async ({ params }) => {
 		})
 
 		return {
+			seoTitle: `${tag.charAt(0).toUpperCase()}${tag.slice(1)}`,
+			seoDescription: `Articles relating to ${tag}`,
 			tag,
 			articles,
 		}

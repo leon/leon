@@ -7,6 +7,8 @@ export const load = (async () => {
 		const articles = await fetchArticles()
 
 		return {
+			seoTitle: 'Articles',
+			seoDescription: 'Articles by Leon Radley',
 			articles,
 		}
 	} catch (err) {

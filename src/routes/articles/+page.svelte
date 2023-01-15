@@ -10,10 +10,6 @@
 	export let data: PageData
 </script>
 
-<svelte:head>
-	<title>Articles</title>
-</svelte:head>
-
 <RandomImageBlock images={[deskImg, pcImg, reactImg]} />
 
 <ArticleBlock title="Articles" articles={data.articles} />

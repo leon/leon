@@ -1,6 +1,7 @@
 export * from './Article'
 export * from './fetchArticles'
 export * from './ImageRef'
+export * from './seo'
 
 export const BASE_URL = 'https://leon.id'
 

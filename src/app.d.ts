@@ -5,7 +5,10 @@ declare global {
 	namespace App {
 		// interface Error {}
 		// interface Locals {}
-		// interface PageData {}
+		interface PageData {
+			seoTitle?: string
+			seoDescription?: string
+		}
 		// interface Platform {}
 	}
 }

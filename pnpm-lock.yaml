@@ -19,6 +19,7 @@ specifiers:
   prettier: ^2.8.3
   prettier-plugin-svelte: ^2.8.1
   prettier-plugin-tailwindcss: ^0.2.1
+  schema-dts: ^1.1.0
   svelte: ^3.54.0
   svelte-check: ^3.0.2
   tailwindcss: ^3.2.4
@@ -30,6 +31,7 @@ specifiers:
 dependencies:
   date-fns: 2.29.3
   lodash-es: 4.17.21
+  schema-dts: 1.1.0_typescript@4.9.4
 
 devDependencies:
   '@sveltejs/adapter-static': 1.0.4_@sveltejs+kit@1.1.1
@@ -2091,6 +2093,14 @@ packages:
       rimraf: 2.7.1
     dev: true
 
+  /schema-dts/1.1.0_typescript@4.9.4:
+    resolution: {integrity: sha512-vdmbs/5ycj4zyKpZIDqTcy+IZi4s7c38RVAYuDmRi7zgxUT8wRWPMLzg0jr7FjdVunYu9yZ00F3+XcZTTFcTOQ==}
+    peerDependencies:
+      typescript: '>=4.1.0'
+    dependencies:
+      typescript: 4.9.4
+    dev: false
+
   /semver/6.3.0:
     resolution: {integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==}
     hasBin: true
@@ -2455,7 +2465,6 @@ packages:
     resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /ufo/1.0.1:
     resolution: {integrity: sha512-boAm74ubXHY7KJQZLlXrtMz52qFvpsbOxDcZOnw/Wf+LS4Mmyu7JxmzD4tDLtUQtmZECypJ0FrCz4QIe6dvKRA==}

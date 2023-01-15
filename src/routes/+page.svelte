@@ -7,6 +7,10 @@
 	export let data: PageData
 </script>
 
+<svelte:head>
+	<meta property="og:type" content="website" />
+</svelte:head>
+
 <IntroBlock />
 <GradientMorphBlock />
 <ArticleBlock title="Articles" articles={data.articles} moreLink="/articles" />

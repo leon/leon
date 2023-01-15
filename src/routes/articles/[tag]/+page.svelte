@@ -5,10 +5,15 @@
 
 	export let data: PageData
 	$: tag = `${data.tag.charAt(0).toUpperCase()}${data.tag.slice(1)}`
+	$: title = `${tag} Articles | Leon Radley`
+	$: description = `Articles relating to ${tag}`
 </script>
 
 <svelte:head>
-	<title>{tag} Articles | Leon Radley</title>
+	<title>{title}</title>
+	<meta property="og:title" content={title} />
+	<meta data-key="description" name="description" content={description} />
+	<meta property="og:description" content={description} />
 </svelte:head>
 
 <ColorsHeroBlock title={data.tag} />
