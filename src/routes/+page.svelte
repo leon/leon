@@ -1,2 +1,12 @@
-<h1 class="text-4xl">Welcome to SvelteKit testing</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import type { PageData } from './$types'
+	import ArticleBlock from '$lib/components/blocks/ArticleBlock.svelte'
+	import IntroBlock from '$lib/components/blocks/IntroBlock.svelte'
+	import GradientMorphBlock from './projects/gradient-morph/GradientMorphBlock.svelte'
+
+	export let data: PageData
+</script>
+
+<IntroBlock />
+<GradientMorphBlock />
+<ArticleBlock title="Articles" articles={data.articles} moreLink="/articles" />

@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-auto'
+import adapter from '@sveltejs/adapter-static'
 import { vitePreprocess } from '@sveltejs/kit/vite'
 import { mdsvex } from 'mdsvex'
 
@@ -20,28 +20,17 @@ const config = {
 				// rehypeSlug,
 				// rehypeAutolinkHeadings,
 			],
-			layout: {
-				// blog: "./path/to/blog/layout.svelte",
-				// article: "./path/to/article/layout.svelte",
-				//_: './src/routes/+layout.svelte',
-			},
+			layout: './src/lib/MdLayout.svelte',
 		}),
 	],
 
 	kit: {
 		adapter: adapter(),
+		alias: {
+			// '$content/*': './src/content/*',
+		},
 		prerender: {
-			entries: [
-				'/',
-				'/articles/*',
-				// '/api/posts/page/*',
-				// '/blog/category/*/page/',
-				// '/blog/category/*/page/*',
-				// '/blog/category/page/',
-				// '/blog/category/page/*',
-				// '/blog/page/',
-				// '/blog/page/*',
-			],
+			concurrency: 4, // render 4 pages in parallel
 		},
 	},
 }

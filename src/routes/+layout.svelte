@@ -1,12 +1,13 @@
-<script context="module">
-	import mark from '$lib/components/Note.svelte'
-	export { mark }
-</script>
-
 <script lang="ts">
 	import '../app.css'
+	import '../prism.css'
+
+	import Header from './header.svelte'
+	import Footer from './footer.svelte'
 </script>
 
-<main class="relative flex-grow">
+<Header />
+<main class="relative flex flex-grow flex-col">
 	<slot />
 </main>
+<Footer />

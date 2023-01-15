@@ -1,6 +1,11 @@
 <script lang="ts">
-	import ArticleList from '$lib/components/ArticleList.svelte'
 	import type { PageData } from './$types'
+	import ArticleBlock from '$lib/components/blocks/ArticleBlock.svelte'
+	import RandomImageBlock from '$lib/components/blocks/RandomImageBlock.svelte'
+
+	import deskImg from '../../content/images/bgs/desk.jpg'
+	import pcImg from '../../content/images/bgs/pc.jpg'
+	import reactImg from '../../content/images/bgs/react.jpg'
 
 	export let data: PageData
 </script>
@@ -9,6 +14,6 @@
 	<title>Articles</title>
 </svelte:head>
 
-<h1>Articles</h1>
+<RandomImageBlock images={[deskImg, pcImg, reactImg]} />
 
-<ArticleList articles={data.articles} />
+<ArticleBlock title="Articles" articles={data.articles} />

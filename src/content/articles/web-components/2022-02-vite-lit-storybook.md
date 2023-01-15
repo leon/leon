@@ -2,7 +2,6 @@
 title: Vite, Lit and Storybook
 date: '2022-02-13'
 description: How to use Vite, Lit and Storybook to build stand alone web components and publish them to NPM
-intro: Getting tools to work together can be a bit of a challenge. In this article I will show you the steps needed.
 tags:
   - web-components
   - vite
@@ -28,13 +27,6 @@ npm create vite@latest my-webcomponents -- --template lit-ts
 ```bash
 npx sb@latest init --builder storybook-builder-vite
 ```
-
-<mark>
-  Storybook uses webpack by default, but since we are using Vite, we would rather use the `storybook-builder-vite` plugin.
-
-Storybook 7 is going to be better and more modular when it comes to which build system it uses under the hood, be it vite, esbuild, swc...
-
-</mark>
 
 ### Vite config changes
 

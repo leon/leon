@@ -1,8 +1,8 @@
-import type { PageServerLoad } from './$types'
 import { error } from '@sveltejs/kit'
 import { fetchArticles } from '$lib/data'
+import type { PageServerLoad } from './$types'
 
-export const load = (async ({ params }) => {
+export const load = (async () => {
 	try {
 		const articles = await fetchArticles()
 

@@ -1,41 +1,73 @@
 import type { Article } from './Article'
+import { orderBy } from 'lodash-es'
 
-export const fetchArticles = async ({ category = '' } = {}) => {
+export interface FetchArticleOptions {
+	// filters
+	tag?: string
+
+	// sorting
+	sortBy?: keyof Article
+	sortByOrder?: 'asc' | 'desc'
+
+	// limit
+	limit?: number
+	offset?: number
+
+	includeModule?: boolean
+}
+export const fetchArticles = async (options: FetchArticleOptions = {}) => {
 	const articles = await Promise.all(
-		Object.entries(import.meta.glob<{ metadata: Article }>('/src/content/articles/*/*.md')).map(
-			async ([path, resolver]) => {
-				const { metadata } = await resolver()
-				const url = path.replace('/src/content/', '/').slice(0, -3)
-				// console.log('url', url)
-				return { ...metadata, url }
-			},
-		),
+		Object.entries(
+			import.meta.glob<Article>('/src/content/articles/*/*.md', {
+				import: 'metadata',
+			}),
+		).map(async ([path, resolver]) => {
+			const metadata = await resolver()
+			const url = path.replace('/src/content/', '/').slice(0, -3)
+			return { ...metadata, url }
+		}),
 	)
+	return filterArticles(articles, options)
+}
 
-	let sortedArticles = articles.sort((a, b) => b.date?.localeCompare(a.date))
+export const fetchArticlesWithContent = async (options: FetchArticleOptions = {}) => {
+	const articles = await Promise.all(
+		Object.entries(
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			import.meta.glob<{ metadata: Article; default: { render: () => { html: string } } }>(
+				'/src/content/articles/*/*.md',
+			),
+		).map(async ([path, resolver]) => {
+			const mod = await resolver()
+			const url = path.replace('/src/content/', '/').slice(0, -3)
+			const content = mod.default.render().html
+			return { ...mod.metadata, url, content }
+		}),
+	)
+	return filterArticles(articles, options)
+}
 
-	if (category) {
-		sortedArticles = sortedArticles.filter((article) => article.categories?.includes(category))
+export const fetchArticle = async (url: string) => {
+	const articles = await fetchArticlesWithContent()
+	return articles.find((article) => article.url === url)
+}
+
+function filterArticles(articles: Article[], options: FetchArticleOptions = {}) {
+	if (options.sortBy) {
+		articles = orderBy(articles, [options.sortBy], [options.sortByOrder ?? 'desc'])
 	}
 
-	// if (offset) {
-	// 	sortedArticles = sortedArticles.slice(offset)
-	// }
+	if (options.tag) {
+		articles = articles.filter((article) => article.tags?.includes(options.tag ?? ''))
+	}
 
-	// if (limit && limit < sortedArticles.length && limit != -1) {
-	// 	sortedArticles = sortedArticles.slice(0, limit)
-	// }
+	if (options.offset) {
+		articles = articles.slice(options.offset)
+	}
 
-	// sortedArticles = sortedArticles.map((post) => ({
-	// 	title: post.title,
-	// 	slug: post.slug,
-	// 	intro: post.intro,
-	// 	// coverImage: post.coverImage,
-	// 	// coverWidth: post.coverWidth,
-	// 	// coverHeight: post.coverHeight,
-	// 	// date: post.date,
-	// 	// categories: post.categories,
-	// }))
+	if (options.limit && options.limit < articles.length && options.limit != -1) {
+		articles = articles.slice(0, options.limit)
+	}
 
-	return sortedArticles
+	return articles
 }
