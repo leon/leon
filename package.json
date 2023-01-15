@@ -20,7 +20,6 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^1.0.4",
-		"@sveltejs/adapter-vercel": "^1.0.4",
 		"@sveltejs/kit": "^1.1.1",
 		"@tailwindcss/typography": "^0.5.9",
 		"@types/lodash-es": "^4.17.6",
