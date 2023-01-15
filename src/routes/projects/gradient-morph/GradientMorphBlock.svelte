@@ -4,7 +4,7 @@
 
 <div class="bg-slate-200">
 	<div class="container grid grid-cols-1 gap-8 py-12 md:grid-cols-2">
-		<img class="rounded-sm object-contain" src={gradientMorphImg} alt="Gradient Morph App" />
+		<img class="rounded-sm object-contain" src={gradientMorphImg} width={3200} height={2000} alt="Gradient Morph App" />
 		<div class="self-center">
 			<h3 class="badge">Project</h3>
 			<h1 class="heading-2">Gradient Morph</h1>
