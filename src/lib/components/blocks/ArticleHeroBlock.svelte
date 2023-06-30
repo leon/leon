@@ -37,7 +37,7 @@
 
 	{#if article.githubUrl}
 		<a
-			class="absolute right-3 -bottom-4 flex items-center gap-2 rounded-md bg-gray-200 px-3 py-2 text-xs font-semibold"
+			class="absolute -bottom-4 right-3 flex items-center gap-2 rounded-md bg-gray-200 px-3 py-2 text-xs font-semibold"
 			href={article.githubUrl}
 		>
 			<GithubIcon />

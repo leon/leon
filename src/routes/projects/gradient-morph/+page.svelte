@@ -39,8 +39,8 @@
 <div
 	class="
 		container prose my-12
-		flex-grow prose-headings:font-heading md:prose-lg
-		lg:prose-xl
+		flex-grow md:prose-lg lg:prose-xl
+		prose-headings:font-heading
 	"
 >
 	<p class="text-xl">
