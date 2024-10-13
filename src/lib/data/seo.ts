@@ -7,8 +7,8 @@ export const siteDescription =
 export const siteSchema: WithContext<Organization> = {
 	'@context': 'https://schema.org',
 	'@type': 'Organization',
-	'@id': 'https://leon.id#organisation',
-	url: 'https://leon.id',
+	'@id': 'https://leonradley.com#organisation',
+	url: 'https://leonradley.com',
 	name: siteTitle,
 	description: siteDescription,
 }

@@ -83,7 +83,7 @@
 		description="A Figma plugin for generating gradient morphs directly in figma."
 	/>
 	<Card
-		href="https://gradient-morph.leon.id"
+		href="https://gradient-morph.leonradley.com"
 		image={appImg}
 		title="Web App"
 		description="A web app for generating gradient morphs. You can even generate videos!"
