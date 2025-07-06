@@ -38,17 +38,17 @@ import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	build: {
-		lib: {
-			entry: 'src/my-element.ts',
-			formats: ['es'],
-		},
-		rollupOptions: {
-			// If we want to publish standalone components we don't externalize lit,
-			// if you are going to use lit in your own project, you can make it a dep instead.
-			// external: /^lit/, <-- comment this line
-		},
-	},
+  build: {
+    lib: {
+      entry: 'src/my-element.ts',
+      formats: ['es'],
+    },
+    rollupOptions: {
+      // If we want to publish standalone components we don't externalize lit,
+      // if you are going to use lit in your own project, you can make it a dep instead.
+      // external: /^lit/, <-- comment this line
+    },
+  },
 })
 ```
 
@@ -59,26 +59,26 @@ Because we have added storybook we need to exclude `.stories.ts` files from the 
 ```json
 // tsconfig.json
 {
-	"compilerOptions": {
-		"module": "esnext",
-		"lib": ["es2017", "dom", "dom.iterable"],
-		"declaration": true,
-		"emitDeclarationOnly": true,
-		"outDir": "./types",
-		"strict": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"moduleResolution": "node",
-		"allowSyntheticDefaultImports": true,
-		"experimentalDecorators": true,
-		"forceConsistentCasingInFileNames": true,
-		"useDefineForClassFields": false
-	},
-	"include": ["src/**/*.ts"],
-	"exclude": ["src/**/*.stories.ts"], // <-- this is the line we need to add
-	"references": [{ "path": "./tsconfig.node.json" }]
+  "compilerOptions": {
+    "module": "esnext",
+    "lib": ["es2017", "dom", "dom.iterable"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./types",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": false
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.stories.ts"], // <-- this is the line we need to add
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
 ```
 
@@ -87,26 +87,26 @@ Because we have added storybook we need to exclude `.stories.ts` files from the 
 The storybook config needs to tweak the vite config for `storybook-builder-vite` to work.
 We need to include and exclude some packages from the vite config.
 
-```js
+```ts
 // .storybook/main.js
 module.exports = {
-	stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-	addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
-	framework: '@storybook/web-components',
-	core: {
-		builder: 'storybook-builder-vite',
-	},
-	async viteFinal(config, { configType }) {
-		// customize the Vite config here
-		config.optimizeDeps.include = [
-			...(config.optimizeDeps?.include ?? []),
-			'@storybook/web-components',
-		]
-		config.optimizeDeps.exclude = [...(config.optimizeDeps?.exclude ?? []), 'lit', 'lit-html']
+  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  framework: '@storybook/web-components',
+  core: {
+    builder: 'storybook-builder-vite',
+  },
+  async viteFinal(config, { configType }) {
+    // customize the Vite config here
+    config.optimizeDeps.include = [
+      ...(config.optimizeDeps?.include ?? []),
+      '@storybook/web-components',
+    ]
+    config.optimizeDeps.exclude = [...(config.optimizeDeps?.exclude ?? []), 'lit', 'lit-html']
 
-		// return the customized config
-		return config
-	},
+    // return the customized config
+    return config
+  },
 }
 ```
 

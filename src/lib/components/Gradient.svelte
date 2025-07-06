@@ -9,7 +9,7 @@
   let { children, class: className }: Props = $props()
 </script>
 
-<div class={['gradient overflow-hidden', className]}>{@render children?.()}</div>
+<div class={['gradient overflow-hidden *:z-10', className]}>{@render children?.()}</div>
 
 <style>
   .gradient {
@@ -17,10 +17,6 @@
     display: flex;
     width: 100%;
     contain: layout paint;
-
-    & > * {
-      z-index: 2;
-    }
   }
   .gradient::before {
     position: absolute;
