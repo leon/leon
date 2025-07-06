@@ -1,44 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.ico" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.svg" type="image/svg+xml" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link
-			rel="preload"
-			href="%sveltekit.assets%/fonts/mona-sans.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin="anonymous"
-		/>
-		<style>
-			@font-face {
-				font-family: 'Mona Sans';
-				src: url('%sveltekit.assets%/fonts/mona-sans.woff2') format('woff2 supports variations'),
-					url('%sveltekit.assets%/fonts/mona-sans.woff2') format('woff2-variations');
-				font-weight: 200 900;
-				font-stretch: 75% 125%;
-				font-display: swap;
-			}
-		</style>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%sveltekit.assets%/favicon.ico" />
+    <link rel="icon" href="%sveltekit.assets%/favicon.svg" type="image/svg+xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="preload"
+      href="%sveltekit.assets%/fonts/mona-sans.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <style>
+      @font-face {
+        font-family: 'Mona Sans';
+        src:
+          url('%sveltekit.assets%/fonts/mona-sans.woff2') format('woff2 supports variations'),
+          url('%sveltekit.assets%/fonts/mona-sans.woff2') format('woff2-variations');
+        font-weight: 200 900;
+        font-stretch: 75% 125%;
+        font-display: swap;
+      }
+    </style>
 
-		<link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
 
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-7WED84QCGT"></script>
-		<script>
-			window.dataLayer = window.dataLayer || []
-			function gtag() {
-				dataLayer.push(arguments)
-			}
-			gtag('js', new Date())
-			gtag('config', 'G-7WED84QCGT')
-		</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7WED84QCGT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'G-7WED84QCGT')
+    </script>
 
-		%sveltekit.head%
-	</head>
-	<body class="min-h-screen" data-sveltekit-preload-data="hover">
-		<div class="flex min-h-screen flex-col">%sveltekit.body%</div>
-	</body>
+    %sveltekit.head%
+  </head>
+  <body class="min-h-screen" data-sveltekit-preload-data="hover">
+    <div class="flex min-h-screen flex-col">%sveltekit.body%</div>
+  </body>
 </html>

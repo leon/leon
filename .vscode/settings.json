@@ -1,6 +1,8 @@
 {
-	"editor.formatOnSave": true,
-	"[svelte]": {
-		"editor.defaultFormatter": "svelte.svelte-vscode"
-	}
+  "editor.formatOnSave": true,
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "svelte"],
+  "files.associations": { "*.svx": "markdown" }
 }

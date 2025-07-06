@@ -1,12 +1,15 @@
 <script lang="ts">
-	import { format, parseISO } from 'date-fns'
+  import { format, parseISO } from 'date-fns'
 
-	export let date: string
+  interface Props {
+    date: string
+  }
+  let { date }: Props = $props()
 
-	$: parsedDate = date && parseISO(String(date))
-	$: dateFormatted = parsedDate && format(parsedDate, 'MMMM yyy')
+  let parsedDate = $derived(date && parseISO(String(date)))
+  let dateFormatted = $derived(parsedDate && format(parsedDate, 'MMMM yyy'))
 </script>
 
 <time class="text-sm" dateTime={date}>
-	{dateFormatted}
+  {dateFormatted}
 </time>

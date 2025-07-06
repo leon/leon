@@ -1,15 +1,21 @@
 <script lang="ts">
-	export let viewBox: string
+  import type { Snippet } from 'svelte'
+  import type { SVGAttributes } from 'svelte/elements'
+
+  interface Props extends SVGAttributes<SVGSVGElement> {
+    children?: Snippet
+  }
+  let { class: className, children, ...props }: Props = $props()
 </script>
 
 <svg
-	class={$$props.class ?? 'w-6'}
-	role="img"
-	aria-hidden={false}
-	xmlns="http://www.w3.org/2000/svg"
-	width="24"
-	height="24"
-	{viewBox}
+  {...props}
+  class={className ?? 'w-6'}
+  role="img"
+  aria-hidden={false}
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
 >
-	<slot />
+  {@render children?.()}
 </svg>

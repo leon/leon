@@ -1,8 +1,14 @@
 <script lang="ts">
-	export let href: string
-	export let title: string
+  import type { Snippet } from 'svelte'
+  import type { HTMLAnchorAttributes } from 'svelte/elements'
+
+  interface Props extends HTMLAnchorAttributes {
+    children?: Snippet
+  }
+
+  let { children, ...props }: Props = $props()
 </script>
 
-<a class="flex items-center p-2 hover:text-accent" {href} {title} target="_blank" rel="noreferrer">
-	<slot />
+<a {...props} class="hover:text-accent flex items-center p-2" target="_blank" rel="noreferrer">
+  {@render children?.()}
 </a>

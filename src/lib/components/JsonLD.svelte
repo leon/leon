@@ -1,7 +1,11 @@
 <script lang="ts">
-	import type { Thing, WithContext } from 'schema-dts'
+  import type { Thing, WithContext } from 'schema-dts'
 
-	export let schema: Thing | WithContext<Thing>
+  interface Props {
+    schema: Thing | WithContext<Thing>
+  }
+  let { schema }: Props = $props()
 </script>
 
-{@html '<script type="application/ld+json">' + JSON.stringify(schema) + '</script>'}
+<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+{@html `<script type="application/ld+json"> ${JSON.stringify(schema)} </script>`}
