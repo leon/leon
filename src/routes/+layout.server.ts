@@ -1,6 +1,4 @@
-// import { dev } from '$app/environment'
-
 // Ensures all pages under this layout (which is all of them) are statically prerendered at build time
-// export const prerender = true
+export const prerender = true
 
-// export const csr = !dev
+export const csr = false
