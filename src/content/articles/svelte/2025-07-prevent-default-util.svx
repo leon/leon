@@ -1,0 +1,30 @@
+---
+title: event.preventDefault utility
+date: '2025-07-06'
+description: for less boilerplate in your event handlers and reusable functions.
+tags:
+  - svelte
+---
+
+Having a way to wrap your event handlers in some code can come in handy when you want to:
+
+- preventDefault
+- Add logging
+- Send metrics
+
+```ts
+<script lang="ts">
+  const preventDefault = <T extends Event>(handler: (event: T) => void) => {
+    return (event: T) => {
+      event.preventDefault()
+      handler(event)
+    }
+  }
+
+  const onClick = (event: MouseEvent) => {
+    console.log('Button clicked!', event)
+  }
+</script>
+
+<button onclick={preventDefault(onClick)}>Button</button>
+```

@@ -1,0 +1,90 @@
+---
+title: SvelteKit Breadcrumbs
+date: '2025-07-06'
+description: How to implement breadcrumbs in sveltekit.
+tags:
+  - svelte
+  - sveltekit
+githubUrl: https://github.com/leon/blog-sveltekit-breadcrumbs
+---
+
+I needed a simple way to have breadcrumbs in sveltekit.
+
+SvelteKit is very simple in its routing, and does not store the whole router tree, which makes the job of creating a solid breadcrumb implementation a bit more challenging.
+
+I chose to implement this as simple as possible. Which ended up being a method you call in the `+layout.svelte` and `+page.svelte` files you want to add to your breadcrumbs.
+
+The downside of this implementation is that it only works clientside because it uses `$effect` to track when a breadcrumb should be added and removed.
+
+```ts
+// lib/breadcrumb-state.svelte.ts
+
+import { SvelteMap } from 'svelte/reactivity'
+
+export interface Breadcrumb {
+  path: string
+  name: string
+}
+
+export interface BreadcrumbInternal extends Breadcrumb {
+  count: number
+}
+
+const breadcrumbMap = new SvelteMap<string, BreadcrumbInternal>()
+
+const breadcrumbs: Breadcrumb[] = $derived.by(() =>
+  Array.from(breadcrumbMap.values()).toSorted((a, b) => a.count - b.count),
+)
+export const getBreadcrumbs = (): Breadcrumb[] => breadcrumbs
+
+export function setBreadcrumb(item: Breadcrumb) {
+  $effect(() => {
+    breadcrumbMap.set(item.path, { ...item, count: item.path.split('/').length })
+    return () => {
+      breadcrumbMap.delete(item.path)
+    }
+  })
+}
+```
+
+The magic happens in the `setBreadcrumb` function.
+We create a child effect which will get disposed of when the component that calls setBreadcrumb is destroyed.
+
+### They way we use it
+
+```ts
+<script lang="ts">
+  import { setBreadcrumb } from '$lib/breadcrumb-state.svelte'
+  import type { LayoutProps } from './$types'
+
+  const { children }: LayoutProps = $props()
+
+  setBreadcrumb({
+    name: 'Level 1',
+    path: '/level-1/',
+  })
+</script>
+
+{@render children()}
+```
+
+### And to render the breadcrumbs
+
+```ts
+<script lang="ts">
+  import { getBreadcrumbs } from './breadcrumb-state.svelte'
+</script>
+
+<nav class="breadcrumbs text-sm">
+  <ul>
+    {#each getBreadcrumbs() as breadcrumb (breadcrumb.path)}
+      <li><a href={breadcrumb.path}>{breadcrumb.name}</a></li>
+    {/each}
+  </ul>
+</nav>
+
+```
+
+I have created a demo to showcase how it works here:
+
+[https://github.com/leon/blog-sveltekit-breadcrumbs](https://github.com/leon/blog-sveltekit-breadcrumbs)
