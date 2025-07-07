@@ -41,7 +41,7 @@
 <Prose>
   <article>
     {#if !article.customHeader}
-      <ArticleHeroBlock {article} />
+      <ArticleHeroBlock {article} randomColor={data.randomColor} />
     {/if}
     <!-- eslint-disable-next-line svelte/no-at-html-tags -->
     {@html article.content}

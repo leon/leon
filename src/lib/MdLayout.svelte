@@ -1,6 +1,15 @@
-<script context="module" lang="ts">
-	import mark from '$lib/components/Note.svelte'
-	export { mark }
+<script lang="ts" module>
+  import mark from '$lib/components/Note.svelte'
+  // eslint-disable-next-line no-import-assign
+  export { mark }
 </script>
 
-<slot />
+<script lang="ts">
+  import type { Snippet } from 'svelte'
+  interface Props {
+    children?: Snippet
+  }
+  let { children }: Props = $props()
+</script>
+
+{@render children?.()}

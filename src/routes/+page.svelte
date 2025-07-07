@@ -12,5 +12,5 @@
 </svelte:head>
 
 <IntroBlock />
-<GradientMorphBlock />
 <ArticleBlock title="Articles" articles={data.articles} moreLink="/articles" />
+<GradientMorphBlock />

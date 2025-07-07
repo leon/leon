@@ -3,9 +3,9 @@
 
   interface Props {
     title: string
-    class: string
+    class?: string
   }
-  let { class: className, title }: Props = $props()
+  let { title, class: className }: Props = $props()
 
   const randomColorStr = randomColor()
 </script>

@@ -1,6 +1,6 @@
 ---
 title: RxJS Global Rate Limit
-date: '2025-07-06'
+date: '2025-07-05'
 description: How to implement a global rate limit operator using rxjs.
 tags:
   - rxjs

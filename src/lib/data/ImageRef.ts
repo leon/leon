@@ -1,6 +1,6 @@
 export interface ImageRef {
-	src: string
-	width: number
-	height: number
-	alt?: string
+  src: string
+  width: number
+  height: number
+  alt?: string
 }

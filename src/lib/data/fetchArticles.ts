@@ -2,6 +2,7 @@ import type { Article } from './Article'
 import { orderBy } from 'lodash-es'
 import type { Component } from 'svelte'
 import { render } from 'svelte/server'
+import { dev } from '$app/environment'
 
 export interface FetchArticleOptions {
   // filters
@@ -25,7 +26,7 @@ export const fetchArticles = async (options: FetchArticleOptions = {}) => {
       }),
     ).map(async ([path, resolver]) => {
       const metadata = await resolver()
-      const url = path.replace('/src/content/', '/').slice(0, -3)
+      const url = path.replace('/src/content/', '/').slice(0, -4)
       return { ...metadata, url }
     }),
   )
@@ -38,7 +39,7 @@ export const fetchArticlesWithContent = async (options: FetchArticleOptions = {}
       import.meta.glob<{ metadata: Article; default: Component }>('/src/content/articles/*/*.svx'),
     ).map(async ([path, resolver]) => {
       const mod = await resolver()
-      const url = path.replace('/src/content/', '/').slice(0, -3)
+      const url = path.replace('/src/content/', '/').slice(0, -4)
       const content = render(mod.default).body
       return { ...mod.metadata, url, content }
     }),
@@ -52,6 +53,16 @@ export const fetchArticle = async (url: string) => {
 }
 
 function filterArticles(articles: Article[], options: FetchArticleOptions = {}) {
+  // in dev mode, we show all articles, in prod we hide them
+  articles = articles.filter((article) => {
+    if (article.draft) {
+      return dev ? true : false // in production, we filter out drafts
+    }
+
+    // show all articles that don't have draft flag
+    return true
+  })
+
   // always fetch articles in date descending order if not specified
   articles = orderBy(articles, [options.sortBy ?? 'date'], [options.sortByOrder ?? 'desc'])
 

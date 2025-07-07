@@ -1,20 +1,19 @@
 <script lang="ts">
   import type { Article } from '$lib/data'
-  import { randomColor } from '$lib/utils'
   import { format, parseISO } from 'date-fns'
   import GithubIcon from '../icons/GithubIcon.svelte'
   import TagList from '../TagList.svelte'
 
   interface Props {
-    class: string
     article: Article
+    randomColor: string
+    class?: string
   }
 
-  let { class: className, article }: Props = $props()
+  let { article, randomColor, class: className }: Props = $props()
 
   const parsedDate = article.date && parseISO(article.date)
   const dateFormatted = parsedDate && format(parsedDate, 'MMMM yyy')
-  const randomColorStr = randomColor()
 </script>
 
 <div
@@ -24,7 +23,7 @@
     'bg-[#a2c3d3]',
     className,
   ]}
-  style:background-color={randomColorStr}
+  style:background-color={randomColor}
 >
   {#if article.image}
     <img class="absolute h-full w-full object-cover" {...article.image} />
