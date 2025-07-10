@@ -8,6 +8,7 @@ export interface Article {
   image?: ImageRef
   tags?: string[]
   githubUrl?: string
+  stackblitzUrl?: string
   customHeader?: boolean
   draft?: boolean
   // the md html content

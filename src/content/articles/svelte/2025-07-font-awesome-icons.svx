@@ -5,6 +5,7 @@ description: How to best integrate Font Awesome icons with Svelte.
 tags:
   - svelte
 githubUrl: https://github.com/leon/blog-svelte-fontawesome-icons
+stackblitzUrl: https://stackblitz.com/~/github.com/leon/blog-svelte-fontawesome-icons
 ---
 
 I needed a way to use Font Awesome with Svelte / SvelteKit.

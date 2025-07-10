@@ -3,6 +3,7 @@
   import { format, parseISO } from 'date-fns'
   import GithubIcon from '../icons/GithubIcon.svelte'
   import TagList from '../TagList.svelte'
+  import StackblitzIcon from '../icons/StackblitzIcon.svelte'
 
   interface Props {
     article: Article
@@ -38,13 +39,30 @@
     </time>
   </div>
 
-  {#if article.githubUrl}
-    <a
-      class="absolute right-3 -bottom-4 flex items-center gap-2 rounded-md bg-gray-200 px-3 py-2 text-xs font-semibold"
-      href={article.githubUrl}
-    >
-      <GithubIcon />
-      <span class="hidden md:inline">View on Github</span>
-    </a>
+  {#if article.stackblitzUrl || article.githubUrl}
+    <div class="absolute right-3 -bottom-4 flex gap-2">
+      {#if article.stackblitzUrl}
+        <a
+          class="flex items-center gap-2 rounded-md bg-gray-200 px-3 py-2 text-xs font-semibold hover:bg-gray-300"
+          href={article.stackblitzUrl}
+          target="_blank"
+          title="Test on Stackblitz"
+        >
+          <StackblitzIcon />
+          <span class="hidden lg:inline">Test on Stackblitz</span>
+        </a>
+      {/if}
+      {#if article.githubUrl}
+        <a
+          class="flex items-center gap-2 rounded-md bg-gray-200 px-3 py-2 text-xs font-semibold hover:bg-gray-300"
+          href={article.githubUrl}
+          target="_blank"
+          title="View on Github"
+        >
+          <GithubIcon />
+          <span class="hidden lg:inline">View on Github</span>
+        </a>
+      {/if}
+    </div>
   {/if}
 </div>

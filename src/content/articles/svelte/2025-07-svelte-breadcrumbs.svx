@@ -6,6 +6,7 @@ tags:
   - svelte
   - sveltekit
 githubUrl: https://github.com/leon/blog-sveltekit-breadcrumbs
+stackblitzUrl: https://stackblitz.com/~/github.com/leon/blog-sveltekit-breadcrumbs
 ---
 
 I needed a simple way to have breadcrumbs in sveltekit.
