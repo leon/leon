@@ -1,0 +1,172 @@
+---
+title: Svelte & Font Awesome Icons
+date: '2025-07-10'
+description: How to best integrate Font Awesome icons with Svelte.
+tags:
+  - svelte
+githubUrl: https://github.com/leon/blog-sveltekit-breadcrumbs
+---
+
+I needed a way to use Font Awesome with Svelte / SvelteKit.
+
+The Font Awesome docs did not have a Svelte example, so I set out to build my own.
+
+The criteria I wanted for the implementation were:
+
+- One-line import for icons
+- Compatible with Tailwind
+- Easily extendable
+- Should work with both free and pro versions
+
+### Dependencies
+
+To start out, we need Font Awesome.
+You can add whatever Font Awesome icon packs you want.
+
+```bash
+pnpm add @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons
+```
+
+### Font Component
+
+The Svelte component below uses `@fortawesome/fontawesome-svg-core` to render SVG icons, removes the default Font Awesome CSS, and passes Tailwind classes to the SVG element.
+
+```ts
+// lib/icon/icon.svelte
+
+<svelte:options namespace="svg" />
+
+<script lang="ts" module>
+	// Configure font awesome
+	import { config, type IconDefinition } from '@fortawesome/fontawesome-svg-core';
+	config.autoAddCss = false;
+	config.keepOriginalSource = false;
+	config.showMissingIcons = false;
+</script>
+
+<script lang="ts">
+	import { icon as iconRender } from '@fortawesome/fontawesome-svg-core';
+
+	interface IconProps {
+		icon: IconDefinition;
+		class?: string;
+	}
+	let { icon, class: className }: IconProps = $props();
+	let iconRendered = $derived(
+		iconRender(icon, {
+			classes: className ? [className] : []
+		}).html
+	);
+</script>
+
+<!-- eslint-disable svelte/no-at-html-tags -->
+{@html iconRendered}
+
+<style>
+	/* Only css needed from font awesome, since we are using tailwind */
+	:global(.svg-inline--fa) {
+		display: inline-block;
+		height: 1em;
+		overflow: visible;
+		vertical-align: -0.125em;
+	}
+</style>
+
+```
+
+## The export file
+
+An `index.ts` file exports all the icons you want to have available, as well as the `icon.svelte` component created above.
+
+I will also explain below why we export the `IconDefinition` type.
+
+```ts
+// /lib/icon/index.ts
+
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+export type { IconDefinition }
+
+export * from '@fortawesome/free-solid-svg-icons'
+
+export {
+  faFacebook,
+  faInstagram,
+  faLinkedin,
+  faVimeo,
+  faYoutube,
+} from '@fortawesome/free-brands-svg-icons'
+
+export { default as Icon } from './icon.svelte'
+```
+
+## How to use it
+
+Since we have exported all the free icons plus a few from the brands, we only need a single import from `$lib/icon`:
+
+```ts
+<script lang="ts">
+	import { Icon, faGrimace, faLaughWink, faSmile } from '$lib/icon';
+</script>
+
+<Icon icon={faSmile} /> The simplest icon will use the inherited font size.
+<Icon class="text-2xl" icon={faGrimace} /> Use Tailwind to override the font size, making it bigger.
+<Icon class="text-[48px] text-red-600" icon={faLaughWink} /> Set a specific size and color.
+
+```
+
+## How to pass icons as props
+
+By typing a prop as `IconDefinition`, we can pass the exported icons to it.
+
+```ts
+// lib/icon-button.svelte
+
+<script lang="ts">
+  import type { Snippet } from 'svelte'
+  import type { HTMLButtonAttributes } from 'svelte/elements'
+  import { Icon, type IconDefinition } from '$lib/icon'
+
+  interface IconButtonProps extends HTMLButtonAttributes {
+    icon: IconDefinition
+    children: Snippet
+  }
+  let { icon, children, class: className, ...props }: IconButtonProps = $props()
+</script>
+
+<button
+  type="button"
+  {...props}
+  class=[
+		'flex items-center justify-between gap-2',
+		'rounded-lg bg-neutral-200 px-4 py-2 hover:bg-neutral-300',
+		className
+	]
+>
+  <Icon {icon} />
+  {@render children()}
+</button>
+
+```
+
+```ts
+// routes/+page.svelte
+
+<script lang="ts">
+  import IconButton from '$lib/icon-button.svelte';
+  import { faSmile } from '$lib/icon';
+</script>
+
+<IconButton icon={faSmile}>My Button</IconButton>
+```
+
+## Demo
+
+I have created a demo to showcase how it works:
+
+[https://github.com/leon/blog-svelte-fontawesome-icons](https://github.com/leon/blog-svelte-fontawesome-icons)
+
+## Font Awesome 7
+
+Font Awesome 7 is going to be released in July 2025, bringing many new icons and improved designs.
+All SVGs are now square (512x512), ensuring consistent spacing and alignment.
+Keep an eye out here: [https://fontawesome.com/](https://fontawesome.com/)
