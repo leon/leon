@@ -16,12 +16,13 @@ export const GET = (async () => {
   for (const article of articles) {
     const tags = article.tags?.map((tag) => `<category>${tag}</category>`)
     items.push(`<item>
+      <guid>${BASE_URL}${article.url}</guid>
+      <link>${BASE_URL}${article.url}</link>
       <title>${escapeXml(article.title)}</title>
       <pubDate>${pubDate(article.date)}</pubDate>
-      <description><![CDATA[${article.description}]]></description>
       ${tags?.join('')}
-      <link>${BASE_URL}${article.url}</link>
-      <guid>${BASE_URL}${article.url}</guid>
+      <description><![CDATA[${article.description}]]></description>
+      <content><![CDATA[${article.content}]]></content>
     </item>`)
   }
   //<content:encoded><![CDATA[${article.content}]]></content:encoded>
