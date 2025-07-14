@@ -16,7 +16,7 @@ export const GET = (async () => {
   for (const article of articles) {
     const tags = article.tags?.map((tag) => `<category>${tag}</category>`)
     items.push(`<item>
-      <title>${article.title}</title>
+      <title>${escapeXml(article.title)}</title>
       <pubDate>${pubDate(article.date)}</pubDate>
       <description><![CDATA[${article.description}]]></description>
       ${tags?.join('')}
@@ -32,7 +32,7 @@ export const GET = (async () => {
       <title>Leon Radley</title>
       <description>Articles by Leon Radley</description>
       <link>${BASE_URL}</link>
-      <atom:link href="${BASE_URL}/feed.xml" rel="self" type="application/rss+xml" />
+      <atom:link href="${BASE_URL}/rss.xml" rel="self" type="application/rss+xml" />
       <language>${lang}</language>
       <sy:updatePeriod>weekly</sy:updatePeriod>
       <lastBuildDate>${pubDate(new Date())}</lastBuildDate>
@@ -48,6 +48,15 @@ export const GET = (async () => {
     },
   })
 }) satisfies RequestHandler
+
+function escapeXml(title: string) {
+  return title
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&apos;')
+}
 
 function pubDate(date: Date | string) {
   if (typeof date === 'undefined') {
