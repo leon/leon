@@ -63,16 +63,27 @@ The Svelte component below uses `@fortawesome/fontawesome-svg-core` to render SV
 <!-- eslint-disable svelte/no-at-html-tags -->
 {@html iconRendered}
 
-<style>
-	/* Only css needed from font awesome, since we are using tailwind */
-	:global(.svg-inline--fa) {
-		display: inline-block;
-		height: 1em;
-		overflow: visible;
-		vertical-align: -0.125em;
-	}
-</style>
+```
 
+We then need a tiny bit of css to set the defaults.
+
+```css
+// lib/icon/icon.css
+
+@layer base {
+  .svg-inline--fa {
+    display: inline-block;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -0.125em;
+  }
+}
+```
+
+```css
+// app.css
+@import 'tailwindcss';
+@import './lib/icon/icon.css';
 ```
 
 ## The export file
